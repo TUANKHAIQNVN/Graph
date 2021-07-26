@@ -3,6 +3,7 @@
 #include<vector>
 #include<fstream>
 #include"Queue.h"
+#include"Stack.h"
 using namespace std;
 
 class Graph
@@ -16,9 +17,12 @@ public:
 	~Graph();
 	void getEdge(int, int);
 
-	//BFS breadth first search
+	//BFS breadth first search --- tim kiem theo chieu rong
 	void breadth_first_search(int); 
 
-	friend ofstream& operator <<(ostream& out, const Graph& src);
+	//DFS depth first search --- tiem kiem theo chieu sau
+	void depth_first_search(int);
+
+	friend ofstream& operator <<(ofstream& out, const Graph& src);
 };
 

@@ -20,7 +20,7 @@ void Graph::getEdge(int vertex_u, int vertex_v) {
 	adj[vertex_v].push_back(vertex_u);
 }
 
-ofstream& operator <<(ostream& out, const Graph& src) {
+ofstream& operator <<(ofstream& out, const Graph& src) {
 	for (int vertex = 0; vertex < src.vertex; vertex++) {
 		cout << "\n Adjacency list of vertex "
 			<< vertex << "\n head ";
@@ -28,6 +28,7 @@ ofstream& operator <<(ostream& out, const Graph& src) {
 			cout << "-> " << x;
 		cout << endl;
 	}
+	return out;
 }
 
 void Graph::breadth_first_search(int start_root){// prints BFS traversal from a given source s
@@ -57,6 +58,32 @@ void Graph::breadth_first_search(int start_root){// prints BFS traversal from a 
 				queueBFS.push(*adjacent_vertices_of);
 				visited[*adjacent_vertices_of] = true;
 			}
+		}
+	}
+}
+
+void Graph::depth_first_search(int start_root) {
+	bool* visited = new bool[this->vertex];
+	for (int i = 0; i < this->vertex; i++)
+		visited[i] = false;
+
+	Stack stackDFS(this->vertex);
+	stackDFS.push(start_root);
+
+	int visited_vertex = 0;
+	while (!stackDFS.isEmpty()) {
+		visited_vertex = stackDFS.pop();
+		
+		if (!visited[visited_vertex]) {
+			visited[visited_vertex] = true;
+			cout << visited_vertex << " ";
+		}
+
+		for (vector<int>::iterator adjacent_vertices_of = this->adj[visited_vertex].begin();
+			adjacent_vertices_of != this->adj[visited_vertex].end();
+			adjacent_vertices_of++) {
+			if (!visited[*adjacent_vertices_of])
+				stackDFS.push(*adjacent_vertices_of);
 		}
 	}
 }

@@ -19,6 +19,7 @@ bool Queue::init(int max_in) {
 	this->max = max_in;
 	this->queue = new int[max_in];
 	this->size = 0;
+	return true;
 }
 bool Queue::isEmpty() {
 	return 0 == this->size;
